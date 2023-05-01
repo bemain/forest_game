@@ -33,7 +33,7 @@ class IsometricTileGame extends FlameGame with MouseMovementDetector {
   late Selector selector;
 
   static const double destTileSize = 64.0;
-  static const double tileHeight = destTileSize / 2;
+  static const double tileHeight = destTileSize / 4;
   final Vector2 topLeft = Vector2.all(200);
 
   @override
@@ -43,16 +43,16 @@ class IsometricTileGame extends FlameGame with MouseMovementDetector {
     final tilesetImage = await images.load('tilemaps/sample.png');
     final tileset = SpriteSheet(
       image: tilesetImage,
-      srcSize: Vector2.all(64.0),
+      srcSize: Vector2.all(32.0),
     );
 
     final matrix = [
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 1, 1, 1],
       [2, 2, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2],
+      [3, 3, 3, 3, 3, 3],
     ];
 
     mapComponent = IsometricTileMapComponent(
