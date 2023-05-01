@@ -17,11 +17,27 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+      ),
       home: Scaffold(
-        body: InteractiveViewer(
-          child: GameWidget(
-            game: IsometricTileGame(),
-          ),
+        appBar: AppBar(title: const Text("Forest Game")),
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: InteractiveViewer(
+                child: GameWidget(
+                  game: IsometricTileGame(),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: FilledButton(
+                  onPressed: () {}, child: const Text("Test Button")),
+            ),
+          ],
         ),
       ),
     );
@@ -35,6 +51,9 @@ class IsometricTileGame extends FlameGame with MouseMovementDetector {
   static const double destTileSize = 64.0;
   static const double tileHeight = destTileSize / 4;
   final Vector2 topLeft = Vector2.all(200);
+
+  @override
+  Color backgroundColor() => Colors.white;
 
   @override
   Future<void> onLoad() async {
