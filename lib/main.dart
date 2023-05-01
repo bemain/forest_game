@@ -74,7 +74,7 @@ class IsometricTileGame extends FlameGame with MouseMovementDetector {
     final Vector2 screenPosition = info.eventPosition.game;
     final Block block = mapComponent.getBlock(screenPosition);
 
-    selector.show = mapComponent.containsBlock(block);
+    selector.visible = mapComponent.containsBlock(block);
     selector.position.setFrom(
       topLeft + mapComponent.getBlockRenderPosition(block),
     );
@@ -82,7 +82,7 @@ class IsometricTileGame extends FlameGame with MouseMovementDetector {
 }
 
 class Selector extends SpriteComponent {
-  bool show = true;
+  bool visible = false;
 
   Selector(double size, Image image)
       : super(
@@ -92,7 +92,7 @@ class Selector extends SpriteComponent {
 
   @override
   void render(Canvas canvas) {
-    if (!show) {
+    if (!visible) {
       return;
     }
 
