@@ -6,6 +6,7 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart' hide Image;
+import 'package:forest_game/hexagonal_isometric_tilemap.dart';
 
 void main() {
   runApp(const MainApp());
@@ -59,10 +60,10 @@ class IsometricTileGame extends FlameGame with MouseMovementDetector {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    final tilesetImage = await images.load('tilemaps/sample.png');
+    final tilesetImage = await images.load('tilemaps/hexagon_sample.png');
     final tileset = SpriteSheet(
       image: tilesetImage,
-      srcSize: Vector2.all(32.0),
+      srcSize: Vector2.all(128),
     );
 
     final matrix = [
@@ -74,10 +75,11 @@ class IsometricTileGame extends FlameGame with MouseMovementDetector {
       [3, 3, 3, 3, 3, 3],
     ];
 
-    mapComponent = IsometricTileMapComponent(
+    mapComponent = IsometricHexagonalTileMapComponent(
       tileset,
       matrix,
-      destTileSize: Vector2.all(destTileSize),
+      surfaceHeight: 32.0,
+      destTileSize: Vector2.all(64),
       tileHeight: tileHeight,
       position: topLeft,
     );
@@ -98,6 +100,22 @@ class IsometricTileGame extends FlameGame with MouseMovementDetector {
       topLeft + mapComponent.getBlockRenderPosition(block),
     );
   }
+
+  @override
+  void render(Canvas canvas) {
+    super.render(canvas);
+
+    canvas.renderPoint(
+      mapComponent.getBlockCenterPosition(Block(0, 0)),
+      size: 5,
+      paint: Paint()..color = Colors.green,
+    );
+    canvas.renderPoint(
+      mapComponent.getBlockRenderPosition(Block(0, 0)),
+      size: 5,
+      paint: Paint()..color = Colors.blue,
+    );
+  }
 }
 
 class Selector extends SpriteComponent {
@@ -105,7 +123,7 @@ class Selector extends SpriteComponent {
 
   Selector(double size, Image image)
       : super(
-          sprite: Sprite(image, srcSize: Vector2.all(32.0)),
+          sprite: Sprite(image, srcSize: Vector2.all(128.0)),
           size: Vector2.all(size),
         );
 
