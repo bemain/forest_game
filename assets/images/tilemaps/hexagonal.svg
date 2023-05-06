@@ -9,8 +9,8 @@
    viewBox="0 0 64 64"
    sodipodi:docname="hexagon_sample.svg"
    inkscape:export-filename="hexagon_sample.png"
-   inkscape:export-xdpi="192"
-   inkscape:export-ydpi="192"
+   inkscape:export-xdpi="768"
+   inkscape:export-ydpi="768"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -28,11 +28,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="9.9940151"
-     inkscape:cx="18.010779"
-     inkscape:cy="37.022158"
+     inkscape:zoom="13.374152"
+     inkscape:cx="17.571208"
+     inkscape:cy="48.601212"
      inkscape:window-width="1920"
-     inkscape:window-height="1011"
+     inkscape:window-height="963"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -72,6 +72,6 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M 12.00161,7.1804667 7.0063994,15.832424 h -9.9904203 l -4.9952102,-8.6519573 4.9952102,-8.6519579 9.9904203,0 z"
-       transform="matrix(3.0304171,0,0,1.7468902,25.905258,19.019613)" />
+       transform="matrix(3.0304171,0,0,1.7468902,25.905258,19.443979)" />
   </g>
 </svg>
