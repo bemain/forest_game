@@ -73,25 +73,23 @@ class GameView extends StatelessWidget {
 
     return InteractiveViewer(
       constrained: false,
-      child: Padding(
-        padding: const EdgeInsets.all(0),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth:
-                (horizontalTiles) * 0.75 * gridSize.width + gridSize.width / 4,
-            maxHeight: gridSize.height +
-                (tiles[0].length - 1) * surfaceHeight +
-                longestColumn.abs() * surfaceHeight / 2,
-          ),
-          child: GameWidget(
-            game: TileGame(
-              matrix: tiles
-                  .map((row) => row.map((tile) => tile.index).toList())
-                  .toList(),
-              gridSize: gridSize.toVector2(),
-              surfaceHeight: surfaceHeight,
-              tileHeight: tileHeight,
-            ),
+      boundaryMargin: const EdgeInsets.symmetric(
+        vertical: 1000,
+        horizontal: 500,
+      ),
+      child: SizedBox(
+        width: (horizontalTiles) * 0.75 * gridSize.width + gridSize.width / 4,
+        height: gridSize.height +
+            (tiles[0].length - 1) * surfaceHeight +
+            longestColumn.abs() * surfaceHeight / 2,
+        child: GameWidget(
+          game: TileGame(
+            matrix: tiles
+                .map((row) => row.map((tile) => tile.index).toList())
+                .toList(),
+            gridSize: gridSize.toVector2(),
+            surfaceHeight: surfaceHeight,
+            tileHeight: tileHeight,
           ),
         ),
       ),

@@ -37,7 +37,7 @@ class TileGame extends FlameGame with MouseMovementDetector {
       Vector2((matrix.length - 1) * 0.75 * gridSize.x, 0);
 
   @override
-  Color backgroundColor() => Colors.black;
+  Color backgroundColor() => Colors.white;
 
   @override
   Future<void> onLoad() async {
