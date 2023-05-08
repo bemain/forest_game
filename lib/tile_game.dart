@@ -5,7 +5,7 @@ import 'package:flame/input.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:forest_game/hexagonal_isometric_tilemap.dart';
-import 'package:forest_game/tile_game/selector.dart';
+import 'package:forest_game/game/selector.dart';
 
 class TileGame extends FlameGame with MouseMovementDetector {
   TileGame({
@@ -13,6 +13,7 @@ class TileGame extends FlameGame with MouseMovementDetector {
     required this.gridSize,
     double? tileHeight,
     double? surfaceHeight,
+    this.onTilePressed,
   })  : tileHeight = tileHeight ?? gridSize.y / 4,
         surfaceHeight = surfaceHeight ?? gridSize.y / 2;
 
@@ -30,6 +31,9 @@ class TileGame extends FlameGame with MouseMovementDetector {
   /// The height of the surface area of a tile.
   final double surfaceHeight;
 
+  /// Callback for when a [tile] is pressed.
+  final Function(Block tile)? onTilePressed;
+
   late IsometricHexagonalTileMapComponent mapComponent;
   late Selector selector;
 
@@ -37,7 +41,7 @@ class TileGame extends FlameGame with MouseMovementDetector {
       Vector2((matrix.length - 1) * 0.75 * gridSize.x, 0);
 
   @override
-  Color backgroundColor() => Colors.white;
+  Color backgroundColor() => Colors.black;
 
   @override
   Future<void> onLoad() async {
@@ -73,5 +77,14 @@ class TileGame extends FlameGame with MouseMovementDetector {
     selector.position.setFrom(
       topLeft + mapComponent.getBlockRenderPosition(block),
     );
+
+    if (mapComponent.containsBlock(block)) {
+      onTilePressed?.call(block);
+    }
+  }
+
+  /// Get the center position of a block, relative to the top left corner.
+  Vector2 getBlockCenterPosition(Block block) {
+    return mapComponent.getBlockCenterPosition(block) + topLeft;
   }
 }

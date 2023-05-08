@@ -1,11 +1,13 @@
-import 'package:flame/extensions.dart';
-import 'package:flame/game.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart' hide Image;
-import 'package:forest_game/tile_game.dart';
+import 'package:forest_game/game/game_view.dart';
 
 void main() {
   runApp(const MainApp());
 }
+
+final gameViewKey = GlobalKey<GameViewState>(debugLabel: "GameView");
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -21,9 +23,10 @@ class MainApp extends StatelessWidget {
         appBar: AppBar(title: const Text("Forest Game")),
         body: Stack(
           children: [
-            const Positioned.fill(
+            Positioned.fill(
               child: GameView(
-                tiles: [
+                key: gameViewKey,
+                tiles: const [
                   [TerrainType.forest, TerrainType.forest, TerrainType.forest],
                   [TerrainType.forest, TerrainType.forest, TerrainType.forest],
                   [TerrainType.forest, TerrainType.forest, TerrainType.forest],
@@ -34,63 +37,12 @@ class MainApp extends StatelessWidget {
             Align(
               alignment: Alignment.topLeft,
               child: FilledButton(
-                  onPressed: () {}, child: const Text("Test Button")),
+                  onPressed: () {
+                    gameViewKey.currentState?.moveFocusCenterTo(Point(200, 0));
+                  },
+                  child: const Text("Test Button")),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-enum TerrainType {
-  forest,
-}
-
-class GameView extends StatelessWidget {
-  const GameView({
-    super.key,
-    required this.tiles,
-    this.gridSize = const Size.square(128),
-  });
-
-  /// 2D matrix of tiles.
-  final List<List<TerrainType>> tiles;
-
-  /// The 2-dimensional size of each tile in the grid.
-  final Size gridSize;
-
-  @override
-  Widget build(BuildContext context) {
-    /// The number of tiles wide the entire tilemap is.
-    final int horizontalTiles = tiles.length + tiles[0].length - 1;
-
-    final double surfaceHeight = gridSize.height / 2;
-    final double tileHeight = gridSize.height / 4;
-
-    /// Index for the column (as rendered, not as layed out in [tiles]) with the most tiles.
-    final int longestColumn = tiles[0].length - tiles.length;
-
-    return InteractiveViewer(
-      constrained: false,
-      boundaryMargin: const EdgeInsets.symmetric(
-        vertical: 1000,
-        horizontal: 500,
-      ),
-      child: SizedBox(
-        width: (horizontalTiles) * 0.75 * gridSize.width + gridSize.width / 4,
-        height: gridSize.height +
-            (tiles[0].length - 1) * surfaceHeight +
-            longestColumn.abs() * surfaceHeight / 2,
-        child: GameWidget(
-          game: TileGame(
-            matrix: tiles
-                .map((row) => row.map((tile) => tile.index).toList())
-                .toList(),
-            gridSize: gridSize.toVector2(),
-            surfaceHeight: surfaceHeight,
-            tileHeight: tileHeight,
-          ),
         ),
       ),
     );

@@ -29,7 +29,7 @@ class IsometricHexagonalTileMapComponent extends IsometricTileMapComponent {
 
   @override
   Vector2 getBlockCenterPosition(Block block) {
-    final result = getBlockRenderPosition(block) + (surfaceSize / 2)
+    final result = (getBlockRenderPosition(block) + effectiveTileSize / 2)
       ..multiply(scale);
     return result;
   }
