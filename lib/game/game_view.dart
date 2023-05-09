@@ -13,10 +13,14 @@ class GameView extends StatefulWidget {
   const GameView({
     super.key,
     required this.tiles,
+    this.gridSize = const Size.square(256),
   });
 
   /// 2D matrix of tiles.
   final List<List<TerrainType>> tiles;
+
+  /// The 2-dimensional size of each tile in the grid.
+  final Size gridSize;
 
   @override
   State<StatefulWidget> createState() => GameViewState();
@@ -36,9 +40,9 @@ class GameViewState extends State<GameView> with TickerProviderStateMixin {
     matrix: widget.tiles
         .map((row) => row.map((tile) => tile.index).toList())
         .toList(),
-    gridSize: Vector2.all(128),
-    surfaceHeight: 128 / 2,
-    tileHeight: 128 / 4,
+    gridSize: widget.gridSize.toVector2(),
+    surfaceHeight: widget.gridSize.height / 2,
+    tileHeight: widget.gridSize.height / 4,
     onTilePressed: (tile) {
       moveFocusCenterTo(game.getBlockCenterPosition(tile).toPoint());
     },
