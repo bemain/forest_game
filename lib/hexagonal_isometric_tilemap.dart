@@ -16,10 +16,10 @@ class IsometricHexagonalTileMapComponent extends IsometricTileMapComponent {
     super.priority,
   });
 
-  /// The height of the isometric tile.
+  /// The height of the surface of the isometric tile.
   final double surfaceHeight;
 
-  /// The size of the isometric tile.
+  /// The size of the surface of the isometric tile.
   Vector2 get surfaceSize => Vector2(effectiveTileSize.x, surfaceHeight);
 
   @override
@@ -29,8 +29,10 @@ class IsometricHexagonalTileMapComponent extends IsometricTileMapComponent {
 
   @override
   Vector2 getBlockCenterPosition(Block block) {
-    final result = (getBlockRenderPosition(block) + effectiveTileSize / 2)
-      ..multiply(scale);
+    final result = getBlockRenderPosition(block) +
+        (Vector2(effectiveTileSize.x / 2,
+            effectiveTileSize.y - effectiveTileHeight - surfaceSize.y / 2)
+          ..multiply(scale));
     return result;
   }
 
