@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:forest_game/hexagonal_isometric_tilemap.dart';
 import 'package:forest_game/game/selector.dart';
 
-class TileGame extends FlameGame with MouseMovementDetector {
+class TileGame extends FlameGame with TapDetector {
   TileGame({
     required this.matrix,
     required this.gridSize,
@@ -69,7 +69,7 @@ class TileGame extends FlameGame with MouseMovementDetector {
   }
 
   @override
-  void onMouseMove(PointerHoverInfo info) {
+  void onTapUp(TapUpInfo info) {
     final Vector2 screenPosition = info.eventPosition.game;
     final Block block = mapComponent.getBlock(screenPosition);
 
