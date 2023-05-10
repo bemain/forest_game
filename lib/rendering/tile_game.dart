@@ -4,8 +4,8 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
-import 'package:forest_game/hexagonal_isometric_tilemap.dart';
-import 'package:forest_game/game/selector.dart';
+import 'package:forest_game/rendering/hexagonal_isometric_tilemap.dart';
+import 'package:forest_game/rendering/selector.dart';
 
 class TileGame extends FlameGame with TapDetector {
   TileGame({

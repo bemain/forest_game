@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:forest_game/game/game_view.dart';
+import 'package:forest_game/rendering/game_view.dart';
 
 void main() {
   runApp(const MainApp());

@@ -4,7 +4,7 @@ import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/services.dart';
-import 'package:forest_game/tile_game.dart';
+import 'package:forest_game/rendering/tile_game.dart';
 
 enum TerrainType {
   forest,
