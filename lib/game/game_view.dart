@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide Image;
+import 'package:flutter/services.dart';
 import 'package:forest_game/tile_game.dart';
 
 enum TerrainType {
@@ -47,6 +48,13 @@ class GameViewState extends State<GameView> with TickerProviderStateMixin {
       moveFocusCenterTo(game.getBlockCenterPosition(tile).toPoint());
     },
   );
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    transformationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
