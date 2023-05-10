@@ -60,6 +60,8 @@ class GameViewState extends State<GameView> with TickerProviderStateMixin {
     return InteractiveViewer(
       transformationController: transformationController,
       constrained: false,
+      minScale: 0.5,
+      maxScale: 2.0,
       boundaryMargin: const EdgeInsets.symmetric(
         vertical: 1000,
         horizontal: 500,
