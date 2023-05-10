@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:forest_game/game/hectare.dart';
 import 'package:forest_game/rendering/game_view.dart';
 
 void main() {
@@ -12,11 +13,11 @@ final gameViewKey = GlobalKey<GameViewState>(debugLabel: "GameView");
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  static const List<List<TerrainType>> tiles = [
-    [TerrainType.forest, TerrainType.forest, TerrainType.forest],
-    [TerrainType.forest, TerrainType.forest, TerrainType.forest],
-    [TerrainType.forest, TerrainType.forest, TerrainType.forest],
-    [TerrainType.forest, TerrainType.forest, TerrainType.forest],
+  static const List<List<Terrain?>> tiles = [
+    [Terrain.forest, Terrain.forest, Terrain.forest],
+    [Terrain.forest, null, Terrain.forest],
+    [Terrain.forest, Terrain.forest, Terrain.forest],
+    [Terrain.forest, null, null],
   ];
 
   @override

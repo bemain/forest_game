@@ -3,12 +3,8 @@ import 'dart:math';
 import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide Image;
-import 'package:flutter/services.dart';
+import 'package:forest_game/game/hectare.dart';
 import 'package:forest_game/rendering/tile_game.dart';
-
-enum TerrainType {
-  forest,
-}
 
 class GameView extends StatefulWidget {
   const GameView({
@@ -18,7 +14,7 @@ class GameView extends StatefulWidget {
   });
 
   /// 2D matrix of tiles.
-  final List<List<TerrainType>> tiles;
+  final List<List<Terrain?>> tiles;
 
   /// The 2-dimensional size of each tile in the grid.
   final Size gridSize;
@@ -39,7 +35,8 @@ class GameViewState extends State<GameView> with TickerProviderStateMixin {
   /// The game that this widget displays.
   late final TileGame game = TileGame(
     matrix: widget.tiles
-        .map((row) => row.map((tile) => tile.index).toList())
+        .map((row) =>
+            row.map((tile) => (tile == null) ? -1 : tile.index).toList())
         .toList(),
     gridSize: widget.gridSize.toVector2(),
     surfaceHeight: widget.gridSize.height / 2,
