@@ -72,13 +72,16 @@ class TileGame extends FlameGame with TapDetector {
   void onTapUp(TapUpInfo info) {
     final Vector2 screenPosition = info.eventPosition.game;
     final Block block = mapComponent.getBlock(screenPosition);
+    final bool blockExists = mapComponent.containsBlock(block) &&
+        mapComponent.blockValue(block) != -1;
 
-    selector.visible = mapComponent.containsBlock(block);
-    selector.position.setFrom(
-      topLeft + mapComponent.getBlockRenderPosition(block),
-    );
+    selector.visible = blockExists;
 
-    if (mapComponent.containsBlock(block)) {
+    if (blockExists) {
+      selector.position.setFrom(
+        topLeft + mapComponent.getBlockRenderPosition(block),
+      );
+
       onTilePressed?.call(block);
     }
   }
